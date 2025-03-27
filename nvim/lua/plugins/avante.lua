@@ -1,7 +1,7 @@
 return {
   {
     "yetone/avante.nvim",
-    enabled = true,
+    enabled = false,
     event = "VeryLazy",
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
@@ -26,8 +26,7 @@ return {
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
-      --- The below d
-      --- ependencies are optional,
+      --- The below d ependencies are optional,
       "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
       "zbirenbaum/copilot.lua", -- for providers='copilot'
