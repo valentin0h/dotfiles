@@ -20,6 +20,7 @@ return {
     -- Define your formatters
     formatters_by_ft = {
       lua = { "stylua" },
+      json = { "biome", stop_after_first = true },
       typescript = { "biome", "prettierd", stop_after_first = true },
       typescriptreact = { "biome", "prettierd", stop_after_first = true },
       javascript = { "biome", "prettierd", stop_after_first = true },
