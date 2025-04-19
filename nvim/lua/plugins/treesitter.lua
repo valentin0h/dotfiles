@@ -2,9 +2,9 @@ return {
   {
     -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
-    -- dependencies = {
-    -- 	"nvim-treesitter/nvim-treesitter-textobjects",
-    -- },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
     build = ":TSUpdate",
     config = function()
       -- [[ Configure Treesitter ]]
@@ -48,8 +48,6 @@ return {
               ["ia"] = "@parameter.inner",
               ["af"] = "@function.outer",
               ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              ["ic"] = "@class.inner",
             },
           },
           move = {
@@ -57,48 +55,33 @@ return {
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               ["]m"] = "@function.outer",
-              ["]]"] = "@class.outer",
             },
             goto_next_end = {
               ["]M"] = "@function.outer",
-              ["]["] = "@class.outer",
             },
             goto_previous_start = {
               ["[m"] = "@function.outer",
-              ["[["] = "@class.outer",
             },
             goto_previous_end = {
               ["[M"] = "@function.outer",
-              ["[]"] = "@class.outer",
-            },
-          },
-          swap = {
-            enable = true,
-            swap_next = {
-              ["<leader>a"] = "@parameter.inner",
-            },
-            swap_previous = {
-              ["<leader>A"] = "@parameter.inner",
             },
           },
         },
       })
-
-      -- require("treesitter-context").setup()
     end,
   },
-  {
-    -- Highlight, edit, and navigate code
-    "nvim-treesitter/nvim-treesitter-context",
-    -- dependencies = {
-    -- 	"nvim-treesitter/nvim-treesitter-textobjects",
-    -- },
-    config = function()
-      -- [[ Configure Treesitter ]]
-      -- See `:help nvim-treesitter`
-      -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
-
-      require("treesitter-context").setup()
-    end,
-  },
+  -- {
+  --   -- Highlight, edit, and navigate code
+  --   "nvim-treesitter/nvim-treesitter-context",
+  --   -- dependencies = {
+  --   -- 	"nvim-treesitter/nvim-treesitter-textobjects",
+  --   -- },
+  --   config = function()
+  --     -- [[ Configure Treesitter ]]
+  --     -- See `:help nvim-treesitter`
+  --     -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
+  --
+  --     require("treesitter-context").setup()
+  --   end,
+  -- },
 }
