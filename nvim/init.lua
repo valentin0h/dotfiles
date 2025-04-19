@@ -129,3 +129,6 @@ vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, { desc = "Code [A]acti
 vim.keymap.set("n", "<Leader>w", "<C-W>", { noremap = true, silent = true })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+
+vim.lsp.enable("luals")

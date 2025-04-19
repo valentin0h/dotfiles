@@ -1,5 +1,4 @@
 return {
-  -- "neovim/nvim-lspconfig",
   "nvim-lua/plenary.nvim",
   --NOTE: First, some plugins that don't require any configuration
 

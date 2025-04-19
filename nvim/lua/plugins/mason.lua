@@ -66,14 +66,14 @@ return {
             end, { desc = "Format current buffer with LSP" })
           end,
         },
-        lua_ls = {
-          Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-            -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { 'missing-fields' } },
-          },
-        },
+        -- lua_ls = {
+        --   Lua = {
+        --     workspace = { checkThirdParty = false },
+        --     telemetry = { enable = false },
+        --     -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+        --     -- diagnostics = { disable = { 'missing-fields' } },
+        --   },
+        -- },
         -- biome = {
         --   single_file_support = true,
         -- },
