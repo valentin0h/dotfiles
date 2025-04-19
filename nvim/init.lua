@@ -131,4 +131,5 @@ vim.keymap.set("n", "<Leader>w", "<C-W>", { noremap = true, silent = true })
 -- vim: ts=2 sts=2 sw=2 et
 --
 
-vim.lsp.enable("luals")
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("ts_ls")
