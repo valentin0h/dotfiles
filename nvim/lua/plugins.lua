@@ -1,11 +1,27 @@
 return {
   "nvim-lua/plenary.nvim",
   --NOTE: First, some plugins that don't require any configuration
-
-  -- Git related plugins
-  "tpope/vim-fugitive",
+  {
+    -- Git related plugins
+    "tpope/vim-fugitive",
+    config = function()
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>om",
+        ":Gvsplit main:% <CR>",
+        { noremap = true, silent = true, desc = "[O]pen [M]ain branch" }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>od",
+        ":Gdiffsplit main <CR>",
+        { noremap = true, silent = true, desc = "[O]pen [M]ain branch" }
+      )
+    end,
+  },
   {
     "tpope/vim-rhubarb",
+
     config = function()
       -- [[ Configure GitHub links ]]
       -- for repository page
