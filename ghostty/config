@@ -1,1 +1,3 @@
-theme = tokyonight
+theme=tokyonight_moon
+macos-option-as-alt=true
+
