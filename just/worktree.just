@@ -9,6 +9,8 @@ gitbook-x-tree worktree-name:
     # Start the timer
     SECONDS=0
     WORKTREE_PATH="{{worktree-name}}"
+    # Strip any prefix before slash (e.g., "valentino/rnd-2343" becomes "rnd-2343")
+    WORKTREE_PATH="${WORKTREE_PATH##*/}"
     GITBOOK_DIR="/Users/valentino/Gitbook/gitbook-x-bare"
     
     echo "Setting up GitBook worktree: $WORKTREE_PATH"
@@ -40,32 +42,17 @@ gitbook-x-tree worktree-name:
     echo "Worktree at $WORKTREE_PATH is ready! Total time taken: $((SECONDS / 60)) minutes and $((SECONDS % 60)) seconds."
     echo "To navigate to the new worktree, run: cd $GITBOOK_DIR/$WORKTREE_PATH"
     
-    # Create zellij session with three named tabs
-    echo "Creating zellij session '$WORKTREE_PATH' with Agent, Code, and Run tabs..."
-    
-    # Start zellij session in background
-    cd "$GITBOOK_DIR/$WORKTREE_PATH"
-    zellij --session "$WORKTREE_PATH" &
-    sleep 2
-    
-    # Rename the default tab and add two more tabs
-    zellij --session "$WORKTREE_PATH" action rename-tab "Agent"
-    zellij --session "$WORKTREE_PATH" action new-tab
-    zellij --session "$WORKTREE_PATH" action rename-tab "Code"
-    zellij --session "$WORKTREE_PATH" action new-tab
-    zellij --session "$WORKTREE_PATH" action rename-tab "Run"
-    
-    echo "Zellij session '$WORKTREE_PATH' created with tabs: Agent, Code, Run"
-    echo "To attach to the session, run: zellij attach $WORKTREE_PATH"
 
-integratoins-tree worktree-name:
+integrations-tree worktree-name:
     #!/usr/bin/env bash
     set -euo pipefail
     
     # Start the timer
     SECONDS=0
     WORKTREE_PATH="{{worktree-name}}"
-    GITBOOK_DIR="/Users/valentino/Gitbook/integratons-bare/"
+    # Strip any prefix before slash (e.g., "valentino/rnd-2343" becomes "rnd-2343")
+    WORKTREE_PATH="${WORKTREE_PATH##*/}"
+    GITBOOK_DIR="/Users/valentino/Gitbook/integrations-bare/"
     
     echo "Setting up Integrations worktree: $WORKTREE_PATH"
     
@@ -91,21 +78,6 @@ integratoins-tree worktree-name:
     echo "Worktree at $WORKTREE_PATH is ready! Total time taken: $((SECONDS / 60)) minutes and $((SECONDS % 60)) seconds."
     echo "To navigate to the new worktree, run: cd $GITBOOK_DIR/$WORKTREE_PATH"
     
-    # Create zellij session with three named tabs
-    echo "Creating zellij session '$WORKTREE_PATH' with Agent, Code, and Run tabs..."
-    
-    # Start zellij session in background
-    cd "$GITBOOK_DIR/$WORKTREE_PATH"
-    zellij --session "$WORKTREE_PATH" &
-    sleep 2
-    
-    # Rename the default tab and add two more tabs
-    zellij --session "$WORKTREE_PATH" action rename-tab "Agent"
-    zellij --session "$WORKTREE_PATH" action new-tab
-    zellij --session "$WORKTREE_PATH" action rename-tab "Code"
-    zellij --session "$WORKTREE_PATH" action new-tab
-    zellij --session "$WORKTREE_PATH" action rename-tab "Run"
-    
-    echo "Zellij session '$WORKTREE_PATH' created with tabs: Agent, Code, Run"
+    # echo "Zellij session '$WORKTREE_PATH' created with tabs: Agent, Code, Run"
     echo "To attach to the session, run: zellij attach $WORKTREE_PATH"
 
