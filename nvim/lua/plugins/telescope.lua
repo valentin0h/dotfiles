@@ -2,6 +2,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -76,19 +77,28 @@ return {
           prompt_title = "Live Grep in Open Files",
         })
       end
+
+      local function telescope_lsp_references()
+        require("telescope.builtin").lsp_references({
+          show_line = false,
+          include_declaration = false,
+          include_current_line = false,
+          fname_width = 50,
+        })
+      end
       vim.keymap.set("n", "<leader>f/", telescope_live_grep_open_files, { desc = "[F]ind [/] in Open Files" })
       vim.keymap.set("n", "<leader>fs", require("telescope.builtin").builtin, { desc = "[S]earch [S]elect Telescope" })
       vim.keymap.set("n", "<leader>gf", require("telescope.builtin").git_files, { desc = "Find [G]it [F]iles" })
       vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "[F]ind [F]iles" })
       vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "[F]ind [H]elp" })
       vim.keymap.set("n", "<leader>fw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord" })
-      -- vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "[F]ind by [G]rep" })
       vim.keymap.set(
         "n",
         "<leader>fg",
         require("telescope").extensions.live_grep_args.live_grep_args,
         { desc = "[F]ind by [G]rep [A]rgs" }
       )
+      vim.keymap.set("n", "grr", telescope_lsp_references, { desc = "[G]oto [R]eferences (Telescope)" })
       vim.keymap.set("n", "<leader>fG", ":LiveGrepGitRoot<cr>", { desc = "[F]ind by [G]rep on Git Root" })
       vim.keymap.set("n", "<leader>fd", require("telescope.builtin").diagnostics, { desc = "[F]ind [D]iagnostics" })
       vim.keymap.set("n", "<leader>fr", require("telescope.builtin").resume, { desc = "[F]ind [R]esume" })

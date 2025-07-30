@@ -129,11 +129,11 @@ vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, { desc = "Code [A]acti
 -- LSP keymaps
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "[G]oto [D]eclaration" })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "[G]oto [D]efinition" })
-vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "[G]oto [R]eferences" })
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "[G]oto [I]mplementation" })
+-- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "[G]oto [R]eferences" })
+-- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "[G]oto [I]mplementation" })
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
-vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
-vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Documentation" })
+-- vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+-- vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Documentation" })
 
 vim.keymap.set("n", "<Leader>w", "<C-W>", { noremap = true, silent = true })
 -- The line beneath this is called `modeline`. See `:help modeline`
