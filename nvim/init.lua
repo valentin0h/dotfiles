@@ -136,6 +136,26 @@ vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
 -- vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Documentation" })
 
 vim.keymap.set("n", "<Leader>w", "<C-W>", { noremap = true, silent = true })
+
+-- File path copying keymaps
+vim.keymap.set("n", "<leader>yf", function()
+  local filepath = vim.fn.expand("%:p")
+  vim.fn.setreg("+", filepath)
+  print("Copied full path: " .. filepath)
+end, { desc = "[Y]ank [F]ull file path" })
+
+vim.keymap.set("n", "<leader>yr", function()
+  local filepath = vim.fn.expand("%:.")
+  vim.fn.setreg("+", filepath)
+  print("Copied relative path: " .. filepath)
+end, { desc = "[Y]ank [R]elative file path" })
+
+vim.keymap.set("n", "<leader>yn", function()
+  local filename = vim.fn.expand("%:t")
+  vim.fn.setreg("+", filename)
+  print("Copied filename: " .. filename)
+end, { desc = "[Y]ank file[N]ame only" })
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 --
