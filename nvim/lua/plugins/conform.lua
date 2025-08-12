@@ -10,8 +10,22 @@ return {
     formatters_by_ft = {
       lua = { "stylua" },
       json = { "biome", stop_after_first = true },
-      typescript = { "biome", "prettierd", stop_after_first = true },
-      typescriptreact = { "biome", "prettierd", stop_after_first = true },
+      typescript = function()
+        if vim.fn.filereadable(".prettierrc.json") == 1 or vim.fn.filereadable("prettier.config.js") == 1 then
+          return { "prettierd" }
+        elseif vim.fn.filereadable("biome.json") == 1 then
+          return { "biome" }
+        end
+        return { "biome" } -- default fallback
+      end,
+      typescriptreact = function()
+        if vim.fn.filereadable(".prettierrc.json") == 1 or vim.fn.filereadable("prettier.config.js") == 1 then
+          return { "prettierd" }
+        elseif vim.fn.filereadable("biome.json") == 1 then
+          return { "biome" }
+        end
+        return { "biome" } -- default fallback
+      end,
       javascript = { "biome", "prettierd", stop_after_first = true },
       javascriptreact = { "biome", "prettierd", stop_after_first = true },
       yaml = { "prettierd" },
