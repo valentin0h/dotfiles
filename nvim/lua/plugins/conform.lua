@@ -29,6 +29,7 @@ return {
       javascript = { "biome", "prettierd", stop_after_first = true },
       javascriptreact = { "biome", "prettierd", stop_after_first = true },
       yaml = { "prettierd" },
+      python = { "black" },
     },
     -- Set default options
     default_format_opts = {
