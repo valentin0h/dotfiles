@@ -1,8 +1,8 @@
 # Personal workspace automation
 # Usage: just --justfile ~/.config/just/workspace.just <recipe> <args>
 
-# GitBook X worktree setup 
-gitbook-x-tree worktree-name:
+# Common worktree setup 
+common-tree worktree-name:
     #!/usr/bin/env bash
     set -euo pipefail
     
@@ -11,73 +11,36 @@ gitbook-x-tree worktree-name:
     WORKTREE_PATH="{{worktree-name}}"
     # Strip any prefix before slash (e.g., "valentino/rnd-2343" becomes "rnd-2343")
     WORKTREE_PATH="${WORKTREE_PATH##*/}"
-    GITBOOK_DIR="/Users/valentino/Gitbook/gitbook-x-bare"
+    # This repo should be cloned as bare
+    COMMON_DIR="/Users/valentino/oneprojectorg/common"
     
-    echo "Setting up GitBook worktree: $WORKTREE_PATH"
+    echo "Setting up Common worktree: $WORKTREE_PATH"
     
-    # Change to GitBook directory
-    cd "$GITBOOK_DIR"
+    # Change to Common directory
+    cd "$COMMON_DIR"
     
     # Update the main branch
-    echo "Updating main branch..."
-    cd main
+    echo "Updating dev branch..."
+    cd dev
     git pull
     cd ..
     
     # Add the new worktree
     echo "Creating new worktree at $WORKTREE_PATH..."
-    git worktree add -b "$WORKTREE_PATH" "$WORKTREE_PATH" main
+    git worktree add -b "$WORKTREE_PATH" "$WORKTREE_PATH" dev
     cd "$WORKTREE_PATH" || exit
     
-    # Install dependencies using frozen lockfile
-    echo "Installing dependencies using frozen lockfile..."
-    pnpm i --prefer-offline --store ~/.pnpm-store --frozen-lockfile
-    pnpm use gitbook-x-dev-valentino
+    # Source nvm and use the correct node version
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    nvm use
     
-    # Generate files with shared Turbo cache
-    echo "Running turbo generate with a shared cache from ../main/.turbo/cache..."
-    pnpm turbo generate --cache-dir=../main/.turbo/cache
+    # Install dependencies using frozen lockfile
+    echo "Installing dependencies..."
+    pnpm i
     
     # Calculate elapsed time and print a combined summary
     echo "Worktree at $WORKTREE_PATH is ready! Total time taken: $((SECONDS / 60)) minutes and $((SECONDS % 60)) seconds."
-    echo "To navigate to the new worktree, run: cd $GITBOOK_DIR/$WORKTREE_PATH"
+    echo "To navigate to the new worktree, run: cd $COMMON_DIR/$WORKTREE_PATH"
     
-
-integrations-tree worktree-name:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    
-    # Start the timer
-    SECONDS=0
-    WORKTREE_PATH="{{worktree-name}}"
-    # Strip any prefix before slash (e.g., "valentino/rnd-2343" becomes "rnd-2343")
-    WORKTREE_PATH="${WORKTREE_PATH##*/}"
-    GITBOOK_DIR="/Users/valentino/Gitbook/integrations-bare/"
-    
-    echo "Setting up Integrations worktree: $WORKTREE_PATH"
-    
-    # Change to GitBook directory
-    cd "$GITBOOK_DIR"
-    
-    # Update the main branch
-    echo "Updating main branch..."
-    cd main
-    git pull
-    cd ..
-    
-    # Add the new worktree
-    echo "Creating new worktree at $WORKTREE_PATH..."
-    git worktree add -b "$WORKTREE_PATH" "$WORKTREE_PATH" main
-    cd "$WORKTREE_PATH" || exit
-    
-    # Install dependencies using frozen lockfile
-    echo "Installing dependencies ..."
-    bun i
-    
-    # Calculate elapsed time and print a combined summary
-    echo "Worktree at $WORKTREE_PATH is ready! Total time taken: $((SECONDS / 60)) minutes and $((SECONDS % 60)) seconds."
-    echo "To navigate to the new worktree, run: cd $GITBOOK_DIR/$WORKTREE_PATH"
-    
-    # echo "Zellij session '$WORKTREE_PATH' created with tabs: Agent, Code, Run"
-    echo "To attach to the session, run: zellij attach $WORKTREE_PATH"
 
