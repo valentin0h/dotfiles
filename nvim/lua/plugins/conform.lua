@@ -1,3 +1,13 @@
+-- Local function to determine formatter preference (prettier first, then biome)
+local function get_js_formatter()
+  if vim.fn.filereadable(".prettierrc.json") == 1 or vim.fn.filereadable("prettier.config.js") == 1 then
+    return { "prettierd" }
+  elseif vim.fn.filereadable("biome.json") == 1 then
+    return { "biome" }
+  end
+  return { "biome" } -- default fallback
+end
+
 return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
@@ -9,25 +19,11 @@ return {
     -- Define your formatters
     formatters_by_ft = {
       lua = { "stylua" },
-      json = { "biome", stop_after_first = true },
-      typescript = function()
-        if vim.fn.filereadable(".prettierrc.json") == 1 or vim.fn.filereadable("prettier.config.js") == 1 then
-          return { "prettierd" }
-        elseif vim.fn.filereadable("biome.json") == 1 then
-          return { "biome" }
-        end
-        return { "biome" } -- default fallback
-      end,
-      typescriptreact = function()
-        if vim.fn.filereadable(".prettierrc.json") == 1 or vim.fn.filereadable("prettier.config.js") == 1 then
-          return { "prettierd" }
-        elseif vim.fn.filereadable("biome.json") == 1 then
-          return { "biome" }
-        end
-        return { "biome" } -- default fallback
-      end,
-      javascript = { "biome", "prettierd", stop_after_first = true },
-      javascriptreact = { "biome", "prettierd", stop_after_first = true },
+      json = get_js_formatter,
+      typescript = get_js_formatter,
+      typescriptreact = get_js_formatter,
+      javascript = get_js_formatter,
+      javascriptreact = get_js_formatter,
       yaml = { "prettierd" },
       python = { "black" },
     },
