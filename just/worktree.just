@@ -29,6 +29,24 @@ common-tree worktree-name:
     echo "Creating new worktree at $WORKTREE_PATH..."
     git worktree add -b "$WORKTREE_PATH" "$WORKTREE_PATH" dev
     cd "$WORKTREE_PATH" || exit
+
+    # Copy the .env.local from dev branch to .env.local if it doesn't exist
+    if [ ! -f .env.local ]; then
+        echo "Creating .env.local from .env.example..."
+        cp ../dev/.env.local . 
+    else
+        echo ".env.local already exists. Skipping copy."
+    fi
+    
+    # Symlink .beads directory from common root (shared across worktrees)
+    if [ -d "$COMMON_DIR/.beads" ] && [ ! -e .beads ]; then
+        echo "Symlinking .beads directory..."
+        ln -s "$COMMON_DIR/.beads" .beads
+    elif [ -L .beads ]; then
+        echo ".beads symlink already exists. Skipping."
+    elif [ ! -d "$COMMON_DIR/.beads" ]; then
+        echo "Warning: $COMMON_DIR/.beads does not exist. Skipping symlink."
+    fi
     
     # Source nvm and use the correct node version
     export NVM_DIR="$HOME/.nvm"
